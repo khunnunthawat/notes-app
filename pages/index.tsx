@@ -6,6 +6,7 @@ import {
   Cog8ToothIcon,
 } from '@heroicons/react/24/solid'
 import Link from 'next/link'
+import { useState } from 'react'
 
 interface NotesProps {
   id: number
@@ -41,6 +42,12 @@ const mock: NotesProps[] = [
 ]
 
 export default function Home() {
+  const [noteModal, setNoteModal] = useState(false)
+
+  const handleNoteModal = () => {
+    setNoteModal(true)
+  }
+
   return (
     <>
       <Head>
@@ -93,10 +100,58 @@ export default function Home() {
       </div>
 
       <div className='flex justify-center my-8'>
-        <div className='flex justify-center items-center w-8 h-8 bg-yellow-400 rounded-full cursor-pointer hover:shadow-md hover:bg-gray-700 transition'>
+        <div
+          className='flex justify-center items-center w-8 h-8 bg-yellow-400 rounded-full cursor-pointer hover:shadow-md hover:bg-gray-700 transition'
+          onClick={handleNoteModal}
+        >
           <PlusIcon className='h-6 w-6 text-white' />
         </div>
       </div>
+
+      {noteModal ? (
+        <>
+          <div className='fixed inset-0 z-10 overflow-y-auto'>
+            <div
+              className='fixed inset-0 w-full h-full bg-black opacity-40 transition'
+              onClick={() => setNoteModal(false)}
+            ></div>
+            <div className='flex items-center min-h-screen px-4 py-8'>
+              <div className='relative w-full max-w-[280px] p-4 mx-auto bg-white rounded-md shadow-lg'>
+                <div className='flex'>
+                  <div className='text-center sm:text-left w-full p-4'>
+                    <textarea
+                      typeof='text'
+                      rows={1}
+                      className='text-sm font-bold text-gray-700 w-full resize-y focus:border-none focus:outline-none placeholder:text-sm placeholder:font-normal'
+                      placeholder='title here..'
+                    ></textarea>
+                    <textarea
+                      typeof='text'
+                      rows={10}
+                      className='text-sm text-gray-500 w-full resize-y focus:border-none focus:outline-none placeholder:text-sm mb-4'
+                      placeholder='write something..'
+                    ></textarea>
+                    <div className='flex gap-2 justify-center'>
+                      <button
+                        className='w-full p-2 text-white text-xs bg-yellow-400 rounded-md hover:bg-yellow-500 transition'
+                        onClick={() => setNoteModal(false)}
+                      >
+                        Add Note
+                      </button>
+                      <button
+                        className='w-full p-2 text-white text-xs bg-gray-700 rounded-md hover:bg-gray-600 transition'
+                        onClick={() => setNoteModal(false)}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      ) : null}
     </>
   )
 }
