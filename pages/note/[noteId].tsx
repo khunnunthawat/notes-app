@@ -1,10 +1,10 @@
 import React from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
+import { NextRouter, useRouter } from 'next/router'
 import { ArrowUturnLeftIcon } from '@heroicons/react/24/solid'
 
 const Note = () => {
-  const router = useRouter()
+  const router: NextRouter = useRouter()
   const id = router.query.noteId
   return (
     <div>
