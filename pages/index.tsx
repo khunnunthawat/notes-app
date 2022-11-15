@@ -1,4 +1,10 @@
-import Head from 'next/head';
+import Head from 'next/head'
+import {
+  ChevronDownIcon,
+  PlusIcon,
+  MagnifyingGlassIcon,
+  Cog8ToothIcon,
+} from '@heroicons/react/24/solid'
 
 export default function Home() {
   return (
@@ -9,14 +15,43 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <div className='flex h-screen'>
-        <div className='m-auto'>
-          <h3 className='text-lg underline text-blue-500'>NOTES APP</h3>
-          <button className='px-4 py-2 rounded-xl font-medium text-white bg-blue-600 hover:bg-blue-800 active:bg-grey-900 focus:outline-none border-4 border-white focus:border-blue-200 transition-all'>
-            Redux
-          </button>
+      {/* <div className='sm:w-80 md:w-4/12'> */}
+      <div className='sm:w-80 md:w-6/12'>
+        <div className='flex w-full flex-row items-center justify-center relative my-8'>
+          <span className='inline-flex text-yellow-400 text-lg mr-4 font-medium'>
+            Notes
+            <ChevronDownIcon className='h-4 w-4 self-center ml-1 font-bold' />
+          </span>
+          <span className='inline-flex text-slate-700 text-lg font-semibold'>
+            Tasks
+          </span>
+
+          <div className='right-0 top-0 absolute'>
+            <span className='self-center relative'>
+              <Cog8ToothIcon className='h-6 w-6 text-yellow-400' />
+            </span>
+          </div>
+        </div>
+
+        <div className='relative flex items-center w-full h-12 rounded-lg focus-within:shadow-lg bg-white overflow-hidden'>
+          <div className='grid place-items-center h-full w-12 text-gray-300'>
+            <MagnifyingGlassIcon className='h-6 w-6 text-gray-scale-3' />
+          </div>
+
+          <input
+            className='peer h-full w-full outline-none text-sm text-gray-700 pr-2'
+            type='text'
+            id='search'
+            placeholder='Search notes..'
+          />
+        </div>
+
+        <div className='flex justify-center my-8'>
+          <div className='flex justify-center items-center w-10 h-10 bg-yellow-400 rounded-full'>
+            <PlusIcon className='h-8 w-8 text-white' />
+          </div>
         </div>
       </div>
     </>
-  );
+  )
 }
