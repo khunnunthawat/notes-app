@@ -1,4 +1,37 @@
-import Head from 'next/head';
+import Head from 'next/head'
+import {
+  ChevronDownIcon,
+  PlusIcon,
+  MagnifyingGlassIcon,
+  Cog8ToothIcon,
+} from '@heroicons/react/24/solid'
+
+const mock = [
+  {
+    id: 1,
+    title: '13 things to work on',
+    description:
+      'Our interior design experts work with you to create the space that you have been dreaming about.',
+  },
+  {
+    id: 2,
+    title: '',
+    description:
+      'Beautiful hand-crafted SVG icons, by the makers of Tailwind CSS.',
+  },
+  {
+    id: 3,
+    title: 'Redux',
+    description:
+      'Redux works with any UI layer, and has a large ecosystem of addons to fit your needs.',
+  },
+  {
+    id: 4,
+    title: '',
+    description:
+      'Redux helps you write applications that behave consistently, run in different environments (client, server, and native), and are easy to test.',
+  },
+]
 
 export default function Home() {
   return (
@@ -9,14 +42,58 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <div className='flex h-screen'>
-        <div className='m-auto'>
-          <h3 className='text-lg underline text-blue-500'>NOTES APP</h3>
-          <button className='px-4 py-2 rounded-xl font-medium text-white bg-blue-600 hover:bg-blue-800 active:bg-grey-900 focus:outline-none border-4 border-white focus:border-blue-200 transition-all'>
-            Redux
-          </button>
+      {/* <div className='sm:w-80 md:w-4/12'> */}
+      <div className='sm:w-80 md:w-6/12'>
+        <div className='flex w-full flex-row items-center justify-center relative my-8'>
+          <span className='inline-flex text-yellow-400 text-lg mr-4 font-medium'>
+            Notes
+            <ChevronDownIcon className='h-4 w-4 self-center ml-1 font-bold' />
+          </span>
+          <span className='inline-flex text-slate-700 text-lg font-semibold'>
+            Tasks
+          </span>
+
+          <div className='right-0 top-0 absolute'>
+            <span className='self-center relative'>
+              <Cog8ToothIcon className='h-6 w-6 text-yellow-400 cursor-pointer' />
+            </span>
+          </div>
+        </div>
+
+        <div className='relative flex items-center w-full h-8 rounded-lg focus-within:shadow-lg bg-white overflow-hidden'>
+          <div className='grid place-items-center h-full w-8 text-gray-300'>
+            <MagnifyingGlassIcon className='h-4 w-4 text-gray-scale-3' />
+          </div>
+          <input
+            className='peer h-full w-full outline-none text-base text-gray-700 pr-2 placeholder:text-xs placeholder:text-gray-500'
+            type='text'
+            id='search'
+            placeholder='Search notes..'
+          />
+        </div>
+
+        <div className='grid gap-4 sm:grid-cols-2 xl:grid-cols-4 my-8'>
+          {mock.map(item => (
+            <div
+              key={item.id}
+              className='flex w-full flex-col justify-between rounded-md bg-white py-5 px-4'
+            >
+              <div>
+                {item.title ? (
+                  <h4 className='mb-3 font-bold text-gray-700'>{item.title}</h4>
+                ) : null}
+                <p className='text-sm text-gray-500'>{item.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className='flex justify-center my-8'>
+          <div className='flex justify-center items-center w-8 h-8 bg-yellow-400 rounded-full cursor-pointer'>
+            <PlusIcon className='h-6 w-6 text-white' />
+          </div>
         </div>
       </div>
     </>
-  );
+  )
 }
