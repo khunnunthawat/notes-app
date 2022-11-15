@@ -7,7 +7,13 @@ import {
 } from '@heroicons/react/24/solid'
 import Link from 'next/link'
 
-const mock = [
+interface NotesProps {
+  id: number
+  title?: string
+  description?: string
+}
+
+const mock: NotesProps[] = [
   {
     id: 1,
     title: '13 things to work on',
@@ -72,7 +78,7 @@ export default function Home() {
       </div>
 
       <div className='grid gap-4 sm:grid-cols-2 xl:grid-cols-4 my-8'>
-        {mock.map(item => (
+        {mock.map((item: NotesProps) => (
           <Link href='/note/[noteId]' as={`note/${item.id}`} key={item.id}>
             <div className='flex w-full flex-col justify-between rounded-md bg-white py-5 px-4 cursor-pointer h-min hover:shadow-md transition'>
               <div>

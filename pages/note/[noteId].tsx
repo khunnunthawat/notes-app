@@ -12,7 +12,7 @@ import {
 } from '@heroicons/react/24/solid'
 import { useState } from 'react'
 
-const Note = () => {
+const Note = (): JSX.Element => {
   const router: NextRouter = useRouter()
   const id = router.query.noteId
 
@@ -20,6 +20,7 @@ const Note = () => {
 
   const styledIcon =
     'h-4 w-4 text-white cursor-pointer hover:text-gray-700 transition'
+
   return (
     <div>
       <div className='flex w-full flex-row items-center justify-center relative my-8'>
@@ -60,12 +61,14 @@ const Note = () => {
             explicabo ullam, aliquid ducimus.
           </textarea>
 
-          <div className='bg-yellow-400 w-full h-10 rounded-md flex justify-between items-center px-4'>
-            <PhotoIcon className={styledIcon} />
-            <ClipboardDocumentIcon className={styledIcon} />
-            <EllipsisHorizontalCircleIcon className={styledIcon} />
-            <PaperClipIcon className={styledIcon} />
-            <MicrophoneIcon className={styledIcon} />
+          <div className='flex justify-center'>
+            <div className='bg-yellow-400 sm:w-full md:w-8/12 xl:w-6/12 h-10 rounded-md flex justify-between items-center px-4'>
+              <PhotoIcon className={styledIcon} />
+              <ClipboardDocumentIcon className={styledIcon} />
+              <EllipsisHorizontalCircleIcon className={styledIcon} />
+              <PaperClipIcon className={styledIcon} />
+              <MicrophoneIcon className={styledIcon} />
+            </div>
           </div>
         </div>
       </div>
