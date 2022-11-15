@@ -44,15 +44,15 @@ export default function Home() {
       </Head>
 
       <div className='flex w-full flex-row items-center justify-center relative my-8'>
-        <span className='inline-flex text-yellow-400 text-lg mr-4 font-medium'>
+        <span className='inline-flex text-yellow-400 text-lg mr-4 font-medium cursor-default'>
           Notes
           <ChevronDownIcon className='h-4 w-4 self-center ml-1 font-bold' />
         </span>
-        <span className='inline-flex text-slate-700 text-lg font-semibold'>
+        <span className='inline-flex text-slate-700 text-lg font-semibold cursor-default'>
           Tasks
         </span>
 
-        <div className='right-0 top-0 absolute'>
+        <div className='right-0 absolute'>
           <span className='self-center relative'>
             <Cog8ToothIcon className='h-6 w-6 text-yellow-400 cursor-pointer' />
           </span>
@@ -60,11 +60,11 @@ export default function Home() {
       </div>
 
       <div className='relative flex items-center w-full h-8 rounded-md focus-within:shadow-md bg-white overflow-hidden hover:shadow-md transition'>
-        <div className='grid place-items-center h-full w-8 text-gray-300'>
-          <MagnifyingGlassIcon className='h-4 w-4 text-gray-scale-3' />
+        <div className='grid place-items-center h-full w-10'>
+          <MagnifyingGlassIcon className='h-4 w-4 text-gray-500' />
         </div>
         <input
-          className='peer h-full w-full outline-none text-sm text-gray-700 pr-2 placeholder:text-xs placeholder:text-gray-500'
+          className='h-full w-full outline-none text-sm text-gray-700 pr-2 placeholder:text-xs placeholder:text-gray-500'
           type='text'
           id='search'
           placeholder='Search notes..'
@@ -87,7 +87,7 @@ export default function Home() {
       </div>
 
       <div className='flex justify-center my-8'>
-        <div className='flex justify-center items-center w-8 h-8 bg-yellow-400 rounded-full cursor-pointer'>
+        <div className='flex justify-center items-center w-8 h-8 bg-yellow-400 rounded-full cursor-pointer hover:shadow-md hover:bg-gray-700 transition'>
           <PlusIcon className='h-6 w-6 text-white' />
         </div>
       </div>
