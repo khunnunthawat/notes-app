@@ -5,6 +5,7 @@ import {
   MagnifyingGlassIcon,
   Cog8ToothIcon,
 } from '@heroicons/react/24/solid'
+import Link from 'next/link'
 
 const mock = [
   {
@@ -42,42 +43,38 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      {/* <div className='sm:w-80 md:w-4/12'> */}
-      <div className='sm:w-80 md:w-6/12'>
-        <div className='flex w-full flex-row items-center justify-center relative my-8'>
-          <span className='inline-flex text-yellow-400 text-lg mr-4 font-medium'>
-            Notes
-            <ChevronDownIcon className='h-4 w-4 self-center ml-1 font-bold' />
+      <div className='flex w-full flex-row items-center justify-center relative my-8'>
+        <span className='inline-flex text-yellow-400 text-lg mr-4 font-medium'>
+          Notes
+          <ChevronDownIcon className='h-4 w-4 self-center ml-1 font-bold' />
+        </span>
+        <span className='inline-flex text-slate-700 text-lg font-semibold'>
+          Tasks
+        </span>
+
+        <div className='right-0 top-0 absolute'>
+          <span className='self-center relative'>
+            <Cog8ToothIcon className='h-6 w-6 text-yellow-400 cursor-pointer' />
           </span>
-          <span className='inline-flex text-slate-700 text-lg font-semibold'>
-            Tasks
-          </span>
-
-          <div className='right-0 top-0 absolute'>
-            <span className='self-center relative'>
-              <Cog8ToothIcon className='h-6 w-6 text-yellow-400 cursor-pointer' />
-            </span>
-          </div>
         </div>
+      </div>
 
-        <div className='relative flex items-center w-full h-8 rounded-lg focus-within:shadow-lg bg-white overflow-hidden'>
-          <div className='grid place-items-center h-full w-8 text-gray-300'>
-            <MagnifyingGlassIcon className='h-4 w-4 text-gray-scale-3' />
-          </div>
-          <input
-            className='peer h-full w-full outline-none text-base text-gray-700 pr-2 placeholder:text-xs placeholder:text-gray-500'
-            type='text'
-            id='search'
-            placeholder='Search notes..'
-          />
+      <div className='relative flex items-center w-full h-8 rounded-md focus-within:shadow-md bg-white overflow-hidden hover:shadow-md transition'>
+        <div className='grid place-items-center h-full w-8 text-gray-300'>
+          <MagnifyingGlassIcon className='h-4 w-4 text-gray-scale-3' />
         </div>
+        <input
+          className='peer h-full w-full outline-none text-sm text-gray-700 pr-2 placeholder:text-xs placeholder:text-gray-500'
+          type='text'
+          id='search'
+          placeholder='Search notes..'
+        />
+      </div>
 
-        <div className='grid gap-4 sm:grid-cols-2 xl:grid-cols-4 my-8'>
-          {mock.map(item => (
-            <div
-              key={item.id}
-              className='flex w-full flex-col justify-between rounded-md bg-white py-5 px-4'
-            >
+      <div className='grid gap-4 sm:grid-cols-2 xl:grid-cols-4 my-8'>
+        {mock.map(item => (
+          <Link href='/note/[noteId]' as={`note/${item.id}`} key={item.id}>
+            <div className='flex w-full flex-col justify-between rounded-md bg-white py-5 px-4 cursor-pointer h-min hover:shadow-md transition'>
               <div>
                 {item.title ? (
                   <h4 className='mb-3 font-bold text-gray-700'>{item.title}</h4>
@@ -85,13 +82,13 @@ export default function Home() {
                 <p className='text-sm text-gray-500'>{item.description}</p>
               </div>
             </div>
-          ))}
-        </div>
+          </Link>
+        ))}
+      </div>
 
-        <div className='flex justify-center my-8'>
-          <div className='flex justify-center items-center w-8 h-8 bg-yellow-400 rounded-full cursor-pointer'>
-            <PlusIcon className='h-6 w-6 text-white' />
-          </div>
+      <div className='flex justify-center my-8'>
+        <div className='flex justify-center items-center w-8 h-8 bg-yellow-400 rounded-full cursor-pointer'>
+          <PlusIcon className='h-6 w-6 text-white' />
         </div>
       </div>
     </>
