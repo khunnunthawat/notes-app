@@ -23,28 +23,28 @@ const Note = (): JSX.Element => {
 
   return (
     <div>
-      <div className='flex w-full flex-row items-center justify-center relative my-8'>
-        <span className='inline-flex text-slate-700 text-lg font-semibold'>
+      <div className='relative flex flex-row items-center justify-center w-full my-8'>
+        <span className='inline-flex text-lg font-semibold text-slate-700'>
           Tasks
         </span>
 
         <Link href='/'>
-          <div className='left-0 absolute'>
-            <span className='self-center relative'>
-              <ArrowUturnLeftIcon className='h-4 w-4 text-slate-700  cursor-pointer' />
+          <div className='absolute left-0'>
+            <span className='relative self-center'>
+              <ArrowUturnLeftIcon className='w-4 h-4 cursor-pointer text-slate-700' />
             </span>
           </div>
         </Link>
       </div>
 
-      <div className='flex w-full flex-col justify-between rounded-md bg-white py-5 px-4 mb-8'>
+      <div className='flex flex-col justify-between w-full px-4 py-5 mb-8 bg-white rounded-md'>
         <div>
           <div className='flex justify-between mb-4'>
             <h5 className='text-xs text-gray-400'>
               13 August 7:25PM | {count} characters
             </h5>
             <div className='inline-flex gap-2'>
-              <CheckIcon className='h-4 w-4 text-gray-700' />
+              <CheckIcon className='w-4 h-4 text-gray-700' />
             </div>
           </div>
 
@@ -52,7 +52,7 @@ const Note = (): JSX.Element => {
           <textarea
             typeof='text'
             rows={10}
-            className='text-sm text-gray-500 w-full resize-y focus:border-none focus:outline-none'
+            className='w-full text-sm text-gray-500 resize-y focus:border-none focus:outline-none'
             onChange={e => setCount(e.target.value.length)}
           >
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus
@@ -62,7 +62,7 @@ const Note = (): JSX.Element => {
           </textarea>
 
           <div className='flex justify-center'>
-            <div className='bg-yellow-400 sm:w-full md:w-8/12 xl:w-6/12 h-10 rounded-md flex justify-between items-center px-4'>
+            <div className='flex items-center justify-between h-10 px-4 bg-yellow-400 rounded-md sm:w-full md:w-8/12 xl:w-6/12'>
               <PhotoIcon className={styledIcon} />
               <ClipboardDocumentIcon className={styledIcon} />
               <EllipsisHorizontalCircleIcon className={styledIcon} />
