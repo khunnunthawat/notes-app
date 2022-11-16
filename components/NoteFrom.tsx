@@ -24,12 +24,7 @@ const NoteFrom = (props: any) => {
   const handleSubmmit = (e: any) => {
     e.preventDefault()
 
-    if (form.title === '' || form.description === '') {
-      alert('Please fill all the fields')
-      return
-    }
-
-    if (form.title !== '' && form.description !== '') {
+    if (form.title !== '' || form.description !== '') {
       setForm({
         id: Math.floor(Math.random() * 1000),
         date: new Date().toLocaleString(),

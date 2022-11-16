@@ -1,11 +1,15 @@
 const postReducer = (state = [], action: { type: any; data: any }) => {
+  let postState
   switch (action.type) {
     case 'ADD_NOTE':
       // return [...state, action.payload];
-      return state.concat([action.data])
+      postState = [...state, action.data]
+      break
     default:
-      return state
+      postState = state
+      break
   }
+  return postState
 }
 
 export default postReducer
