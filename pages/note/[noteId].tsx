@@ -54,8 +54,6 @@ const Note = (props: any): JSX.Element => {
       edit: true,
     }
 
-    console.log('newData: ', newData)
-
     if (
       dataEdit.title !== '' ||
       dataEdit.description !== '' ||
