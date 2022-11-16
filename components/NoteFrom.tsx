@@ -13,11 +13,9 @@ const NoteFrom = (props: any) => {
   })
 
   const handleChange = (e: any) => {
-    console.log('handleChange -------->')
-
     const { name, value } = e.target
 
-    let newForm = { ...form }
+    let newForm: any = { ...form }
     newForm[name] = value
 
     setForm(newForm)
@@ -45,7 +43,6 @@ const NoteFrom = (props: any) => {
       })
 
       modal(false)
-      console.log('handleSubmmit -------->', form)
     }
   }
 

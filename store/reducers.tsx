@@ -1,5 +1,3 @@
-// const initialState = [];
-
 const postReducer = (state = [], action) => {
   switch (action.type) {
     case 'ADD_NOTE':
