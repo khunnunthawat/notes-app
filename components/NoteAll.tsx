@@ -9,7 +9,7 @@ const NoteAll = (props: any) => {
       {props.notes.map((item: NotesProps, index: number) => (
         <Link href='/note/[noteId]' as={`note/${item.id}`} key={index}>
           <div
-            className='flex flex-col justify-between w-full col-auto row-auto mb-4 transition bg-white rounded-md cursor-pointer hover:shadow-md'
+            className='flex flex-col justify-between w-full transition bg-white rounded-md cursor-pointer hover:shadow-md'
             onClick={() => props.dispatch({ type: 'EDIT_NOTE', id: item.id })}
           >
             <div className='p-4'>
