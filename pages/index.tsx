@@ -1,6 +1,53 @@
 import Head from 'next/head'
+import {
+  ChevronDownIcon,
+  PlusIcon,
+  MagnifyingGlassIcon,
+  Cog8ToothIcon,
+} from '@heroicons/react/24/solid'
+import Link from 'next/link'
+import { useState } from 'react'
+
+interface NotesProps {
+  id: number
+  title?: string
+  description?: string
+}
+
+const mock: NotesProps[] = [
+  {
+    id: 1,
+    title: '13 things to work on',
+    description:
+      'Our interior design experts work with you to create the space that you have been dreaming about.',
+  },
+  {
+    id: 2,
+    title: '',
+    description:
+      'Beautiful hand-crafted SVG icons, by the makers of Tailwind CSS.',
+  },
+  {
+    id: 3,
+    title: 'Redux',
+    description:
+      'Redux works with any UI layer, and has a large ecosystem of addons to fit your needs.',
+  },
+  {
+    id: 4,
+    title: '',
+    description:
+      'Redux helps you write applications that behave consistently, run in different environments (client, server, and native), and are easy to test.',
+  },
+]
 
 export default function Home() {
+  const [noteModal, setNoteModal] = useState(false)
+
+  const handleNoteModal = () => {
+    setNoteModal(true)
+  }
+
   return (
     <>
       <Head>
@@ -9,14 +56,102 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <div className='flex h-screen'>
-        <div className='m-auto'>
-          <h3 className='text-lg underline text-blue-500'>NOTES APP</h3>
-          <button className='px-4 py-2 rounded-xl font-medium text-white bg-blue-600 hover:bg-blue-800 active:bg-grey-900 focus:outline-none border-4 border-white focus:border-blue-200 transition-all'>
-            Redux
-          </button>
+      <div className='relative flex flex-row items-center justify-center w-full my-8'>
+        <span className='inline-flex mr-4 text-lg font-medium text-yellow-400 cursor-default'>
+          Notes
+          <ChevronDownIcon className='self-center w-4 h-4 ml-1 font-bold' />
+        </span>
+        <span className='inline-flex text-lg font-semibold cursor-default text-slate-700'>
+          Tasks
+        </span>
+
+        <div className='absolute right-0'>
+          <span className='relative self-center'>
+            <Cog8ToothIcon className='w-6 h-6 text-yellow-400 cursor-pointer' />
+          </span>
         </div>
       </div>
+
+      <div className='relative flex items-center w-full h-8 overflow-hidden transition bg-white rounded-md focus-within:shadow-md hover:shadow-md'>
+        <div className='grid w-10 h-full place-items-center'>
+          <MagnifyingGlassIcon className='w-4 h-4 text-gray-500' />
+        </div>
+        <input
+          className='w-full h-full pr-2 text-sm text-gray-700 outline-none placeholder:text-xs placeholder:text-gray-500'
+          type='text'
+          id='search'
+          placeholder='Search notes..'
+        />
+      </div>
+
+      <div className='grid gap-4 my-8 sm:grid-cols-2 xl:grid-cols-4'>
+        {mock.map((item: NotesProps) => (
+          <Link href='/note/[noteId]' as={`note/${item.id}`} key={item.id}>
+            <div className='flex flex-col justify-between w-full px-4 py-5 transition bg-white rounded-md cursor-pointer h-min hover:shadow-md'>
+              <div>
+                {item.title ? (
+                  <h4 className='mb-3 font-bold text-gray-700'>{item.title}</h4>
+                ) : null}
+                <p className='text-sm text-gray-500'>{item.description}</p>
+              </div>
+            </div>
+          </Link>
+        ))}
+      </div>
+
+      <div className='flex justify-center my-8'>
+        <div
+          className='flex items-center justify-center w-8 h-8 transition bg-yellow-400 rounded-full cursor-pointer hover:shadow-md hover:bg-gray-700'
+          onClick={handleNoteModal}
+        >
+          <PlusIcon className='w-6 h-6 text-white' />
+        </div>
+      </div>
+
+      {noteModal ? (
+        <>
+          <div className='fixed inset-0 z-10 overflow-y-auto'>
+            <div
+              className='fixed inset-0 w-full h-full transition bg-black opacity-40'
+              onClick={() => setNoteModal(false)}
+            ></div>
+            <div className='flex items-center min-h-screen px-4 py-8'>
+              <div className='relative w-full max-w-[280px] p-4 mx-auto bg-white rounded-md shadow-lg'>
+                <div className='flex'>
+                  <div className='w-full p-4 text-center sm:text-left'>
+                    <textarea
+                      typeof='text'
+                      rows={1}
+                      className='w-full text-sm font-bold text-gray-700 resize-y focus:border-none focus:outline-none placeholder:text-sm placeholder:font-normal'
+                      placeholder='title here..'
+                    ></textarea>
+                    <textarea
+                      typeof='text'
+                      rows={10}
+                      className='w-full mb-4 text-sm text-gray-500 resize-y focus:border-none focus:outline-none placeholder:text-sm'
+                      placeholder='write something..'
+                    ></textarea>
+                    <div className='flex justify-center gap-2'>
+                      <button
+                        className='w-full p-2 text-xs text-white transition bg-yellow-400 rounded-md hover:bg-yellow-500'
+                        onClick={() => setNoteModal(false)}
+                      >
+                        Add Note
+                      </button>
+                      <button
+                        className='w-full p-2 text-xs text-white transition bg-gray-700 rounded-md hover:bg-gray-600'
+                        onClick={() => setNoteModal(false)}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      ) : null}
     </>
   )
 }
