@@ -1,4 +1,4 @@
-const postReducer = (state = [], action) => {
+const postReducer = (state = [], action: { type: any; data: any }) => {
   switch (action.type) {
     case 'ADD_NOTE':
       // return [...state, action.payload];
