@@ -31,6 +31,13 @@ const postReducer = (state = initialState, action: any) => {
         }
       })
       break
+    case 'SEACH_NOTE':
+      postState = state.filter((data: any) => {
+        if (data.title.toLowerCase().includes(action.data.toLowerCase())) {
+          return data
+        }
+      })
+      break
     default:
       postState = state
       break
