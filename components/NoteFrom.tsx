@@ -59,7 +59,7 @@ const NoteFrom = (props: any) => {
                   onChange={handleChange}
                   className='w-full text-sm font-bold text-gray-700 resize-y focus:border-none focus:outline-none placeholder:text-sm placeholder:font-normal'
                   placeholder='title here..'
-                ></input>
+                />
                 <textarea
                   name='description'
                   rows={10}
@@ -67,7 +67,7 @@ const NoteFrom = (props: any) => {
                   onChange={handleChange}
                   className='w-full mb-4 text-sm text-gray-500 resize-y focus:border-none focus:outline-none placeholder:text-sm'
                   placeholder='write something..'
-                ></textarea>
+                />
                 <div className='flex justify-center gap-2'>
                   <button
                     className='w-full p-2 text-xs text-white transition bg-yellow-400 rounded-md hover:bg-yellow-500'
