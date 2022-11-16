@@ -5,7 +5,7 @@ import { NotesProps } from '../types'
 
 const NoteAll = (props: any) => {
   return (
-    <div className='gap-4 my-8 columns-2'>
+    <div className='grid w-full gap-4 my-8 sm:grid-cols-2 xl:grid-cols-4'>
       {props.notes.map((item: NotesProps, index: number) => (
         <Link href='/note/[noteId]' as={`note/${item.id}`} key={index}>
           <div
