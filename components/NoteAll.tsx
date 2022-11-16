@@ -5,29 +5,25 @@ import { NotesProps } from '../types'
 
 const NoteAll = (props: any) => {
   return (
-    <div className='grid gap-4 my-8 sm:grid-cols-2 xl:grid-cols-4'>
+    <div className='gap-4 my-8 columns-2'>
       {props.notes.map((item: NotesProps, index: number) => (
-        <div
-          key={index}
-          onClick={() => props.dispatch({ type: 'EDIT_NOTE', id: item.id })}
-        >
-          <Link href='/note/[noteId]' as={`note/${item.id}`}>
-            <div className='flex flex-col justify-between w-full px-4 py-5 transition bg-white rounded-md cursor-pointer h-min hover:shadow-md'>
-              <div>
-                {item.title ? (
-                  <h4 className='mb-3 font-bold text-gray-700 break-words'>
-                    {item.title}
-                  </h4>
-                ) : null}
-                {item.description ? (
-                  <p className='text-sm text-gray-500 break-words'>
-                    {item.description}
-                  </p>
-                ) : null}
-              </div>
-            </div>
-          </Link>
-        </div>
+        <Link href='/note/[noteId]' as={`note/${item.id}`} key={index}>
+          <div
+            className='flex flex-col justify-between w-full px-4 py-5 mb-4 transition bg-white rounded-md cursor-pointer hover:shadow-md'
+            onClick={() => props.dispatch({ type: 'EDIT_NOTE', id: item.id })}
+          >
+            {item.title ? (
+              <h4 className='mb-3 font-bold text-gray-700 break-words'>
+                {item.title}
+              </h4>
+            ) : null}
+            {item.description ? (
+              <p className='text-sm text-gray-500 break-words'>
+                {item.description}
+              </p>
+            ) : null}
+          </div>
+        </Link>
       ))}
     </div>
   )
