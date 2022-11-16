@@ -54,7 +54,15 @@ const Note = (props: any): JSX.Element => {
       edit: true,
     }
 
-    if (dataEdit.title !== '' || dataEdit.description !== '') {
+    console.log('newData: ', newData)
+
+    if (
+      dataEdit.title !== '' ||
+      dataEdit.description !== '' ||
+      dataEdit.title === '' ||
+      dataEdit.description === ''
+    ) {
+      console.log('update-note')
       props.dispatch({
         type: 'UPDATE_NOTE',
         id: parseInt(id),
