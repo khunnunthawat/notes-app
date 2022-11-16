@@ -6,9 +6,10 @@ const NoteFrom = (props: any) => {
   const { modal } = props
 
   const [form, setForm] = useState({
+    id: Math.floor(Math.random() * 1000),
     date: new Date().toLocaleString(),
     title: '',
-    text: '',
+    description: '',
   })
 
   const handleChange = (e: any) => {
@@ -25,16 +26,17 @@ const NoteFrom = (props: any) => {
   const handleSubmmit = (e: any) => {
     e.preventDefault()
 
-    if (form.title === '' || form.text === '') {
+    if (form.title === '' || form.description === '') {
       alert('Please fill all the fields')
       return
     }
 
-    if (form.title !== '' && form.text !== '') {
+    if (form.title !== '' && form.description !== '') {
       setForm({
+        id: Math.floor(Math.random() * 1000),
         date: new Date().toLocaleString(),
         title: '',
-        text: '',
+        description: '',
       })
 
       props.dispatch({
@@ -42,7 +44,7 @@ const NoteFrom = (props: any) => {
         data: form,
       })
 
-      // modal(false)
+      modal(false)
       console.log('handleSubmmit -------->', form)
     }
   }
@@ -67,9 +69,9 @@ const NoteFrom = (props: any) => {
                   placeholder='title here..'
                 ></input>
                 <textarea
-                  name='text'
+                  name='description'
                   rows={10}
-                  value={form.text}
+                  value={form.description}
                   onChange={handleChange}
                   className='w-full mb-4 text-sm text-gray-500 resize-y focus:border-none focus:outline-none placeholder:text-sm'
                   placeholder='write something..'
