@@ -10,6 +10,7 @@ const NoteFrom = (props: any) => {
     date: new Date().toLocaleString(),
     title: '',
     description: '',
+    edit: false,
   })
 
   const handleChange = (e: any) => {
@@ -30,6 +31,7 @@ const NoteFrom = (props: any) => {
         date: new Date().toLocaleString(),
         title: '',
         description: '',
+        edit: false,
       })
 
       props.dispatch({

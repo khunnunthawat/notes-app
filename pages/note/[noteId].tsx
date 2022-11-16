@@ -1,17 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
 import { NextRouter, useRouter } from 'next/router'
-import {
-  ArrowUturnLeftIcon,
-  CheckIcon,
-  PhotoIcon,
-  ClipboardDocumentIcon,
-  PaperClipIcon,
-  MicrophoneIcon,
-  EllipsisHorizontalCircleIcon,
-  TrashIcon,
-} from '@heroicons/react/24/solid'
+import * as Hero from '@heroicons/react/24/solid'
 import { connect } from 'react-redux'
+import { useState } from 'react'
 
 const Note = (props: any): JSX.Element => {
   const router: NextRouter = useRouter()
@@ -20,6 +12,14 @@ const Note = (props: any): JSX.Element => {
   const styledIcon =
     'h-4 w-4 text-white cursor-pointer hover:text-gray-700 transition'
 
+  const [dataEdit, setDataEdit] = useState({
+    id: Math.floor(Math.random() * 1000),
+    date: new Date().toLocaleString(),
+    title: '',
+    description: '',
+    edit: false,
+  })
+
   const noteItem = props.notes.map((item: any) => {
     if (item.id === parseInt(id)) {
       return item
@@ -27,12 +27,40 @@ const Note = (props: any): JSX.Element => {
   })
 
   const removeNote = () => {
-    console.log('remove note ----->')
     props.dispatch({
       type: 'DELETE_NOTE',
       id: parseInt(id),
     })
     router.push('/')
+  }
+
+  const handleChange = (e: any) => {
+    const { name, value } = e.target
+
+    let newForm: any = { ...noteItem[0] }
+    newForm[name] = value
+    setDataEdit(newForm)
+  }
+
+  const handlerUpdateNote = (e: any) => {
+    e.preventDefault()
+
+    const newData = {
+      id: parseInt(id),
+      date: new Date().toLocaleString(),
+      title: e.target.title.value,
+      description: e.target.description.value,
+      edit: true,
+    }
+
+    if (dataEdit.title !== '' || dataEdit.description !== '') {
+      props.dispatch({
+        type: 'UPDATE_NOTE',
+        id: parseInt(id),
+        data: newData,
+      })
+      router.push('/')
+    }
   }
 
   return (
@@ -45,14 +73,14 @@ const Note = (props: any): JSX.Element => {
         <Link href='/'>
           <div className='absolute left-0 cursor-pointer'>
             <span className='relative self-center'>
-              <ArrowUturnLeftIcon className='w-4 h-4 text-slate-700' />
+              <Hero.ArrowUturnLeftIcon className='w-4 h-4 text-slate-700' />
             </span>
           </div>
         </Link>
 
         <div className='absolute right-0 cursor-pointer' onClick={removeNote}>
           <span className='relative self-center'>
-            <TrashIcon className='w-5 h-5 text-red-500 transition hover:text-gray-700' />
+            <Hero.TrashIcon className='w-5 h-5 text-red-500 transition hover:text-gray-700' />
           </span>
         </div>
       </div>
@@ -62,38 +90,43 @@ const Note = (props: any): JSX.Element => {
           const { title, date, description } = item
           return (
             <div key={item.id}>
-              <div className='flex justify-between mb-4'>
-                <h5 className='self-center text-xs text-gray-400 cursor-default'>
-                  {date} | {description.length} characters
-                </h5>
-                <div className='inline-flex items-center justify-center w-6 h-6 gap-2 transition bg-yellow-400 rounded-full cursor-pointer hover:shadow-md hover:bg-gray-700'>
-                  <CheckIcon className='w-4 h-4 text-white' />
+              <form onSubmit={handlerUpdateNote}>
+                <div className='flex justify-between mb-4'>
+                  <h5 className='self-center text-xs text-gray-400 cursor-default'>
+                    {date} | {description.length} characters
+                  </h5>
+                  <button className='inline-flex items-center justify-center w-6 h-6 gap-2 transition bg-yellow-400 rounded-full cursor-pointer hover:shadow-md hover:bg-gray-700'>
+                    <Hero.CheckIcon className='w-4 h-4 text-white' />
+                  </button>
                 </div>
-              </div>
-              <input
-                type='text'
-                name='title'
-                defaultValue={title}
-                className='w-full mb-3 text-sm font-bold text-gray-700 resize-y focus:border-none focus:outline-none placeholder:text-sm placeholder:font-normal'
-                placeholder='title here..'
-              />
-              <textarea
-                typeof='text'
-                rows={10}
-                className='w-full text-sm text-gray-500 resize-y focus:border-none focus:outline-none'
-                placeholder='write something..'
-                defaultValue={description}
-              />
+                <input
+                  type='text'
+                  name='title'
+                  defaultValue={title}
+                  className='w-full mb-3 text-sm font-bold text-gray-700 resize-y focus:border-none focus:outline-none placeholder:text-sm placeholder:font-normal'
+                  placeholder='title here..'
+                  onChange={handleChange}
+                />
+                <textarea
+                  typeof='text'
+                  name='description'
+                  rows={10}
+                  defaultValue={description}
+                  className='w-full text-sm text-gray-500 resize-y focus:border-none focus:outline-none'
+                  placeholder='write something..'
+                  onChange={handleChange}
+                />
+              </form>
             </div>
           )
         })}
         <div className='flex justify-center'>
           <div className='flex items-center justify-between h-10 px-4 bg-yellow-400 rounded-md sm:w-full md:w-8/12 xl:w-6/12'>
-            <PhotoIcon className={styledIcon} />
-            <ClipboardDocumentIcon className={styledIcon} />
-            <EllipsisHorizontalCircleIcon className={styledIcon} />
-            <PaperClipIcon className={styledIcon} />
-            <MicrophoneIcon className={styledIcon} />
+            <Hero.PhotoIcon className={styledIcon} />
+            <Hero.ClipboardDocumentIcon className={styledIcon} />
+            <Hero.EllipsisHorizontalCircleIcon className={styledIcon} />
+            <Hero.PaperClipIcon className={styledIcon} />
+            <Hero.MicrophoneIcon className={styledIcon} />
           </div>
         </div>
       </div>
