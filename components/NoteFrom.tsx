@@ -1,15 +1,17 @@
 import React from 'react'
 import { useState } from 'react'
 import { connect } from 'react-redux'
+import { NotesProps } from '../types'
 
 const NoteFrom = (props: any) => {
   const { modal } = props
 
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<NotesProps>({
     id: Math.floor(Math.random() * 1000),
     date: new Date().toLocaleString(),
     title: '',
     description: '',
+    edit: false,
   })
 
   const handleChange = (e: any) => {
@@ -30,6 +32,7 @@ const NoteFrom = (props: any) => {
         date: new Date().toLocaleString(),
         title: '',
         description: '',
+        edit: false,
       })
 
       props.dispatch({
