@@ -2,7 +2,7 @@
 
 const postReducer = (state = [], action) => {
   switch (action.type) {
-    case 'ADD_POST':
+    case 'ADD_NOTE':
       // return [...state, action.payload];
       return state.concat([action.data])
     default:

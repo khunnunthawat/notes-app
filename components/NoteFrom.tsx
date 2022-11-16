@@ -1,11 +1,12 @@
 import React from 'react'
 import { useState } from 'react'
+import { connect } from 'react-redux'
 
-const Modal = (props: any) => {
+const NoteFrom = (props: any) => {
   const { modal } = props
 
   const [form, setForm] = useState({
-    date: '',
+    date: new Date().toLocaleString(),
     title: '',
     text: '',
   })
@@ -24,18 +25,25 @@ const Modal = (props: any) => {
   const handleSubmmit = (e: any) => {
     e.preventDefault()
 
-    if (form.date === '' || form.title === '' || form.text === '') {
+    if (form.title === '' || form.text === '') {
       alert('Please fill all the fields')
       return
     }
 
-    if (form.date !== '' && form.title !== '' && form.text !== '') {
+    if (form.title !== '' && form.text !== '') {
       setForm({
-        date: Date().toLocaleString(),
+        date: new Date().toLocaleString(),
         title: '',
         text: '',
       })
+
+      props.dispatch({
+        type: 'ADD_NOTE',
+        data: form,
+      })
+
       // modal(false)
+      console.log('handleSubmmit -------->', form)
     }
   }
 
@@ -89,4 +97,4 @@ const Modal = (props: any) => {
   )
 }
 
-export default Modal
+export default connect()(NoteFrom)
