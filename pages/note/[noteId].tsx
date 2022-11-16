@@ -4,6 +4,7 @@ import { NextRouter, useRouter } from 'next/router'
 import * as Hero from '@heroicons/react/24/solid'
 import { connect } from 'react-redux'
 import { useState } from 'react'
+import { NotesProps } from '../../types'
 
 const Note = (props: any): JSX.Element => {
   const router: NextRouter = useRouter()
@@ -13,14 +14,14 @@ const Note = (props: any): JSX.Element => {
     'h-4 w-4 text-white cursor-pointer hover:text-gray-700 transition'
 
   const [dataEdit, setDataEdit] = useState({
-    id: Math.floor(Math.random() * 1000),
+    id: parseInt(id),
     date: new Date().toLocaleString(),
     title: '',
     description: '',
     edit: false,
   })
 
-  const noteItem = props.notes.map((item: any) => {
+  const noteItem = props.notes.filter((item: any) => {
     if (item.id === parseInt(id)) {
       return item
     }
@@ -45,7 +46,7 @@ const Note = (props: any): JSX.Element => {
   const handlerUpdateNote = (e: any) => {
     e.preventDefault()
 
-    const newData = {
+    const newData: NotesProps = {
       id: parseInt(id),
       date: new Date().toLocaleString(),
       title: e.target.title.value,
@@ -87,13 +88,12 @@ const Note = (props: any): JSX.Element => {
 
       <div className='flex flex-col justify-between w-full px-4 py-5 mb-8 bg-white rounded-md'>
         {noteItem.map((item: any) => {
-          const { title, date, description } = item
           return (
             <div key={item.id}>
               <form onSubmit={handlerUpdateNote}>
                 <div className='flex justify-between mb-4'>
                   <h5 className='self-center text-xs text-gray-400 cursor-default'>
-                    {date} | {description.length} characters
+                    {item?.date} | {item?.description.length} characters
                   </h5>
                   <button className='inline-flex items-center justify-center w-6 h-6 gap-2 transition bg-yellow-400 rounded-full cursor-pointer hover:shadow-md hover:bg-gray-700'>
                     <Hero.CheckIcon className='w-4 h-4 text-white' />
@@ -102,7 +102,7 @@ const Note = (props: any): JSX.Element => {
                 <input
                   type='text'
                   name='title'
-                  defaultValue={title}
+                  defaultValue={item?.title || ''}
                   className='w-full mb-3 text-sm font-bold text-gray-700 resize-y focus:border-none focus:outline-none placeholder:text-sm placeholder:font-normal'
                   placeholder='title here..'
                   onChange={handleChange}
@@ -111,7 +111,7 @@ const Note = (props: any): JSX.Element => {
                   typeof='text'
                   name='description'
                   rows={10}
-                  defaultValue={description}
+                  defaultValue={item?.description || ''}
                   className='w-full text-sm text-gray-500 resize-y focus:border-none focus:outline-none'
                   placeholder='write something..'
                   onChange={handleChange}
