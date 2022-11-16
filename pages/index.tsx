@@ -7,6 +7,7 @@ import {
 } from '@heroicons/react/24/solid'
 import Link from 'next/link'
 import { useState } from 'react'
+import Modal from '../components/Modal'
 
 interface NotesProps {
   id: number
@@ -110,46 +111,7 @@ export default function Home() {
 
       {noteModal ? (
         <>
-          <div className='fixed inset-0 z-10 overflow-y-auto'>
-            <div
-              className='fixed inset-0 w-full h-full transition bg-black opacity-40'
-              onClick={() => setNoteModal(false)}
-            ></div>
-            <div className='flex items-center min-h-screen px-4 py-8'>
-              <div className='relative w-full max-w-[280px] p-4 mx-auto bg-white rounded-md shadow-lg'>
-                <div className='flex'>
-                  <div className='w-full p-4 text-center sm:text-left'>
-                    <textarea
-                      typeof='text'
-                      rows={1}
-                      className='w-full text-sm font-bold text-gray-700 resize-y focus:border-none focus:outline-none placeholder:text-sm placeholder:font-normal'
-                      placeholder='title here..'
-                    ></textarea>
-                    <textarea
-                      typeof='text'
-                      rows={10}
-                      className='w-full mb-4 text-sm text-gray-500 resize-y focus:border-none focus:outline-none placeholder:text-sm'
-                      placeholder='write something..'
-                    ></textarea>
-                    <div className='flex justify-center gap-2'>
-                      <button
-                        className='w-full p-2 text-xs text-white transition bg-yellow-400 rounded-md hover:bg-yellow-500'
-                        onClick={() => setNoteModal(false)}
-                      >
-                        Add Note
-                      </button>
-                      <button
-                        className='w-full p-2 text-xs text-white transition bg-gray-700 rounded-md hover:bg-gray-600'
-                        onClick={() => setNoteModal(false)}
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <Modal modal={setNoteModal} />
         </>
       ) : null}
     </>
