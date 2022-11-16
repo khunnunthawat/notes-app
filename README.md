@@ -1,18 +1,27 @@
 # Notes App Redux
 
-- [TODO LIST]
-  - [1. Learning redux]
-  - [2. setup nextjs + tailwind + redux]
-  - [3. UI responsive]
-  - [4. create store redux]
-  - [5. create note list]
-  - [6. get all notes]
-  - [7. update note (edit)]
-  - [8. delete note by id]
+![notes_app](https://user-images.githubusercontent.com/68588944/202199067-78ddfa35-4c29-4535-8110-7780929b3bde.png)
+
+- TODO LIST
+  - Learning redux
+  - setup nextjs + tailwind + redux
+  - UI responsive
+  - create store redux
+  - create note list
+  - get all notes
+  - update note (edit)
+  - delete note by id
 
 ## UI Design
 
 [Mobile Notes App UI Design Template](https://www.uplabs.com/posts/mobile-notes-app-ui-design-template-a6fc218c-d639-4366-b77f-d8ae7aa1f124)
+
+### Feature notes app
+- create
+- get all
+- update
+- delete
+- `search is not ready`
 
 ### Tools
 
