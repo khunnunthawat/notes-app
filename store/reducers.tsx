@@ -6,6 +6,9 @@ const postReducer = (state = initialState, action: any) => {
     case 'ADD_NOTE':
       postState = [...state, action.data]
       break
+    case 'DELETE_NOTE':
+      postState = state.filter((data: any) => data.id !== action.id)
+      break
     default:
       postState = state
       break

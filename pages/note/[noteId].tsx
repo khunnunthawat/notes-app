@@ -9,6 +9,7 @@ import {
   PaperClipIcon,
   MicrophoneIcon,
   EllipsisHorizontalCircleIcon,
+  TrashIcon,
 } from '@heroicons/react/24/solid'
 import { connect } from 'react-redux'
 
@@ -25,6 +26,15 @@ const Note = (props: any): JSX.Element => {
     }
   })
 
+  const removeNote = () => {
+    console.log('remove note ----->')
+    props.dispatch({
+      type: 'DELETE_NOTE',
+      id: parseInt(id),
+    })
+    router.push('/')
+  }
+
   return (
     <>
       <div className='relative flex flex-row items-center justify-center w-full my-8'>
@@ -33,12 +43,18 @@ const Note = (props: any): JSX.Element => {
         </span>
 
         <Link href='/'>
-          <div className='absolute left-0'>
+          <div className='absolute left-0 cursor-pointer'>
             <span className='relative self-center'>
-              <ArrowUturnLeftIcon className='w-4 h-4 cursor-pointer text-slate-700' />
+              <ArrowUturnLeftIcon className='w-4 h-4 text-slate-700' />
             </span>
           </div>
         </Link>
+
+        <div className='absolute right-0 cursor-pointer' onClick={removeNote}>
+          <span className='relative self-center'>
+            <TrashIcon className='w-5 h-5 text-red-500 transition hover:text-gray-700' />
+          </span>
+        </div>
       </div>
 
       <div className='flex flex-col justify-between w-full px-4 py-5 mb-8 bg-white rounded-md'>
@@ -47,7 +63,7 @@ const Note = (props: any): JSX.Element => {
           return (
             <div key={item.id}>
               <div className='flex justify-between mb-4'>
-                <h5 className='self-center text-xs text-gray-400'>
+                <h5 className='self-center text-xs text-gray-400 cursor-default'>
                   {date} | {description.length} characters
                 </h5>
                 <div className='inline-flex items-center justify-center w-6 h-6 gap-2 transition bg-yellow-400 rounded-full cursor-pointer hover:shadow-md hover:bg-gray-700'>
