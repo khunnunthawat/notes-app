@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.like-button,
+.dislike-button {
+  font-size: 1rem;
+  padding: 5px 10px;
+  color: #585858;
+}
+
+.liked,
+.disliked {
+  font-weight: bold;
+}

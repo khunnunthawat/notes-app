@@ -2,6 +2,7 @@ import Head from 'next/head'
 import * as Hero from '@heroicons/react/24/solid'
 import { useState } from 'react'
 import { NoteAll, NoteFrom, NoteSearch } from '../components'
+import ButtonLike from '../components/ButtonLike'
 export default function Home() {
   const [noteModal, setNoteModal] = useState(false)
 
@@ -49,6 +50,8 @@ export default function Home() {
           <NoteFrom modal={setNoteModal} />
         </>
       ) : null}
+
+      <ButtonLike />
     </>
   )
 }
